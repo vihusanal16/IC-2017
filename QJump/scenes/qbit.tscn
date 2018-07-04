@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/qbit.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Shiny_steel_ball.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 41.338 )
+
+[node name="qbit" type="KinematicBody2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.7777, 0, 0, 0.155313, 0.0872099, 11.1442 )
+shapes/0/trigger = false
+collision/layers = 8
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 2 )
+modulate = Color( 0, 1, 0.31149, 1 )
+
+[node name="pos_QbitH" type="Position2D" parent="Sprite"]
+
+transform/pos = Vector2( 0.521183, 2.80889 )
+transform/scale = Vector2( 23.3949, 12.0385 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.0872099, 11.1442 )
+transform/scale = Vector2( 0.7777, 0.155313 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+
