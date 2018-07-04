@@ -17,6 +17,7 @@ func _ready():
 func _process(delta):
 	cont += 100
 	setScore(cont)
+	print("Andre alterou")
 	pass
 	
 func setScore(valor):
