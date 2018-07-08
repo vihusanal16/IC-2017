@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scenes/gerador_plataforma.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/plataforma.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/background.png" type="Texture" id=3]
-[ext_resource path="res://scenes/qbit.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/pauser.gd" type="Script" id=5]
-[ext_resource path="res://fonts/score.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://scripts/bordas.gd" type="Script" id=2]
+[ext_resource path="res://scenes/plataforma.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/background.png" type="Texture" id=4]
+[ext_resource path="res://scenes/qbit.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/pauser.gd" type="Script" id=6]
+[ext_resource path="res://fonts/score.fnt" type="BitmapFont" id=7]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 196.762, 10 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -49,7 +55,27 @@ scale = Vector2( 1, 1 )
 
 [node name="gerador_plataforma" parent="." instance=ExtResource( 1 )]
 
-[node name="static_body" type="StaticBody2D" parent="."]
+[node name="bordas" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.32206, 201, 1.1868 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="teto" type="CollisionShape2D" parent="bordas"]
+
+transform/pos = Vector2( 201, 1.1868 )
+transform/scale = Vector2( 1, 1.32206 )
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="paredes" type="StaticBody2D" parent="."]
 
 transform/pos = Vector2( 0, 1 )
 input/pickable = false
@@ -57,10 +83,10 @@ shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 0.237126, 200, 523 )
 shapes/0/trigger = false
 shapes/1/shape = SubResource( 1 )
-shapes/1/transform = Matrix32( 0.437298, 0, 0, 1.44439, 471.062, 243.136 )
+shapes/1/transform = Matrix32( 0.437298, 0, 0, 1.44439, 476.062, 243.136 )
 shapes/1/trigger = false
 shapes/2/shape = SubResource( 1 )
-shapes/2/transform = Matrix32( 0.437298, 0, 0, 1.44439, -84.6222, 243.579 )
+shapes/2/transform = Matrix32( 0.437298, 0, 0, 1.44439, -75.6222, 243.579 )
 shapes/2/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -69,7 +95,7 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="chao" type="CollisionShape2D" parent="static_body"]
+[node name="chao" type="CollisionShape2D" parent="paredes"]
 
 transform/pos = Vector2( 200, 523 )
 transform/scale = Vector2( 1, 0.237126 )
@@ -77,28 +103,29 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="paredeE" type="CollisionShape2D" parent="static_body"]
+[node name="paredeE" type="CollisionShape2D" parent="paredes"]
 
-transform/pos = Vector2( 471.062, 243.136 )
+transform/pos = Vector2( 476.062, 243.136 )
 transform/scale = Vector2( 0.437298, 1.44439 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 1
 
-[node name="paredeD" type="CollisionShape2D" parent="static_body"]
+[node name="paredeD" type="CollisionShape2D" parent="paredes"]
 
-transform/pos = Vector2( -84.6222, 243.579 )
+transform/pos = Vector2( -75.6222, 243.579 )
 transform/scale = Vector2( 0.437298, 1.44439 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 2
 
-[node name="plataforma" parent="." instance=ExtResource( 2 )]
+[node name="plataforma" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 200.661, 498.58 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -119,12 +146,12 @@ motion/mirroring = Vector2( 0, 500 )
 [node name="sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
 transform/pos = Vector2( 189.078, 175.149 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="sprite1" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 
-transform/pos = Vector2( 191.294, 515.663 )
-texture = ExtResource( 3 )
+transform/pos = Vector2( 189.078, 515.663 )
+texture = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -146,7 +173,7 @@ drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 script/script = SubResource( 2 )
 
-[node name="qbit" parent="." instance=ExtResource( 4 )]
+[node name="qbit" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 206.759, 188.582 )
 
@@ -157,7 +184,7 @@ layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-script/script = ExtResource( 5 )
+script/script = ExtResource( 6 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -177,7 +204,7 @@ margin/left = 201.0
 margin/top = 2.0
 margin/right = 393.0
 margin/bottom = 32.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 text = "0"
 align = 2
 valign = 1
@@ -185,5 +212,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = SubResource( 3 )
+
+[connection signal="body_enter" from="bordas" to="bordas" method="_on_bordas_body_enter"]
 
 
