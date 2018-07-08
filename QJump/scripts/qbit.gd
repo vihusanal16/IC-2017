@@ -4,8 +4,8 @@ const GRAVITY = 800 # Pixels por segundo
 
 const FLOOR_ANGLE_TOLERANCE = 40
 const WALK_FORCE = 600
-const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 310
+const WALK_MIN_SPEED = 20
+const WALK_MAX_SPEED = 350
 const STOP_FORCE = 1300
 const JUMP_SPEED = 400
 const JUMP_MAX_AIRBORNE_TIME = 0.2
@@ -16,12 +16,8 @@ var on_air_time = 100
 var jumping = false
 var prev_jump_pressed = false
 
-
-
 var troca_comandos = false
 var portaH = 0
-
-
 
 func _ready():
 	set_z(20)
@@ -138,8 +134,4 @@ abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
 
 	on_air_time += delta
 	prev_jump_pressed = jump
-
-
-
-
-
+	
