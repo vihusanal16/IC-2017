@@ -7,10 +7,13 @@ var morreu = 0
 var cont = 0
 
 var score = 0 setget setScore
+var lifes = 3 setget setLifes
 
 signal score_changed
+signal lifes_changed
 
 func _ready():
+	randomize()
 	set_process(true)
 	pass
 	
@@ -23,6 +26,8 @@ func _process(delta):
 func setScore(valor):
 	if valor % 5 == 0:
 		score += 1
-	
 	emit_signal("score_changed")
-	pass
+
+func setLifes(valor):
+	lifes = valor
+	emit_signal("lifes_changed")
