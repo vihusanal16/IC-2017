@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://scenes/gerador_plataforma.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/bordas.gd" type="Script" id=2]
@@ -7,16 +7,27 @@
 [ext_resource path="res://scenes/qbit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/pauser.gd" type="Script" id=6]
 [ext_resource path="res://fonts/score.fnt" type="BitmapFont" id=7]
+[ext_resource path="res://sprites/Power-ups/star_gold.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 196.762, 10 )
 
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 199.023, 10 )
+
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 193.376, 165.245 )
+extents = Vector2( 198.683, 165.245 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 195.743, 10 )
 
 [sub_resource type="GDScript" id=2]
 
@@ -36,14 +47,31 @@ func _process(delta):
 
 script/source = "extends Label
 
-
-
 func _ready():
 	game.connect(\"score_changed\", self, \"_on_score_changed\")
 	pass
 
 func _on_score_changed():
 	set_text(str(game.score))
+	pass"
+
+[sub_resource type="GDScript" id=5]
+
+resource/name = "draw_lifes"
+script/source = "extends Node2D
+
+export(Texture) var textura
+
+func _ready():
+	game.connect(\"lifes_changed\", self , \"_on_lifes_changed\")
+
+func _on_lifes_changed():
+	update()
+	pass
+	
+func _draw():
+	for n in range(0 , game.lifes):
+		draw_texture( textura, Vector2(n * (textura.get_width() + 5) , 0))
 	pass"
 
 [node name="main" type="CanvasLayer"]
@@ -59,8 +87,11 @@ scale = Vector2( 1, 1 )
 
 input/pickable = true
 shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1.32206, 201, 1.1868 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.32206, 201, -2.8132 )
 shapes/0/trigger = false
+shapes/1/shape = SubResource( 7 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1.39472, 199, 495.131 )
+shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -69,25 +100,36 @@ script/script = ExtResource( 2 )
 
 [node name="teto" type="CollisionShape2D" parent="bordas"]
 
-transform/pos = Vector2( 201, 1.1868 )
+transform/pos = Vector2( 201, -2.8132 )
 transform/scale = Vector2( 1, 1.32206 )
 shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
+
+[node name="chao" type="CollisionShape2D" parent="bordas"]
+
+transform/pos = Vector2( 199, 495.131 )
+transform/scale = Vector2( 1, 1.39472 )
+shape = SubResource( 7 )
+trigger = false
+_update_shape_index = 1
 
 [node name="paredes" type="StaticBody2D" parent="."]
 
 transform/pos = Vector2( 0, 1 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 0.237126, 200, 523 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.191445, 200, 513.314 )
 shapes/0/trigger = false
 shapes/1/shape = SubResource( 1 )
-shapes/1/transform = Matrix32( 0.437298, 0, 0, 1.44439, 476.062, 243.136 )
+shapes/1/transform = Matrix32( 0.188575, 0, 0, 1.44439, 427.225, 243.136 )
 shapes/1/trigger = false
 shapes/2/shape = SubResource( 1 )
-shapes/2/transform = Matrix32( 0.437298, 0, 0, 1.44439, -75.6222, 243.579 )
+shapes/2/transform = Matrix32( 0.187168, 0, 0, 1.44439, -30.5, 243.579 )
 shapes/2/trigger = false
+shapes/3/shape = SubResource( 6 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 201, -9 )
+shapes/3/trigger = false
 collision/layers = 1
 collision/mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
@@ -95,29 +137,36 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="chao" type="CollisionShape2D" parent="paredes"]
+[node name="paredeChao" type="CollisionShape2D" parent="paredes"]
 
-transform/pos = Vector2( 200, 523 )
-transform/scale = Vector2( 1, 0.237126 )
+transform/pos = Vector2( 200, 513.314 )
+transform/scale = Vector2( 1, 0.191445 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
 [node name="paredeE" type="CollisionShape2D" parent="paredes"]
 
-transform/pos = Vector2( 476.062, 243.136 )
-transform/scale = Vector2( 0.437298, 1.44439 )
+transform/pos = Vector2( 427.225, 243.136 )
+transform/scale = Vector2( 0.188575, 1.44439 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 1
 
 [node name="paredeD" type="CollisionShape2D" parent="paredes"]
 
-transform/pos = Vector2( -75.6222, 243.579 )
-transform/scale = Vector2( 0.437298, 1.44439 )
+transform/pos = Vector2( -30.5, 243.579 )
+transform/scale = Vector2( 0.187168, 1.44439 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 2
+
+[node name="paredeTeto" type="CollisionShape2D" parent="paredes"]
+
+transform/pos = Vector2( 201, -9 )
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 3
 
 [node name="plataforma" parent="." instance=ExtResource( 3 )]
 
@@ -125,7 +174,6 @@ transform/pos = Vector2( 200.661, 498.58 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -212,6 +260,11 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = SubResource( 3 )
+
+[node name="lifes" type="Node2D" parent="HUD"]
+
+script/script = SubResource( 5 )
+textura = ExtResource( 8 )
 
 [connection signal="body_enter" from="bordas" to="bordas" method="_on_bordas_body_enter"]
 
