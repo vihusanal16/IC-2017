@@ -51,7 +51,6 @@ scale = Vector2( 1, 1 )
 
 [node name="static_body" type="StaticBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 0, 1 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
