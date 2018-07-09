@@ -8,6 +8,9 @@ func _on_bordas_body_enter( body ):
 		print("QBIT colidiu")
 		game.teste = 0
 		game.lifes -= 1
+		get_tree().reload_current_scene()
+		if game.lifes <= 0:
+			get_tree().finish()
 	else:
 		game.teste = 1
 		
