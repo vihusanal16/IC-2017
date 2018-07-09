@@ -84,6 +84,7 @@ scale = Vector2( 1, 1 )
 
 [node name="bordas" type="Area2D" parent="."]
 
+editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1.32206, 201, -2.8132 )
@@ -115,6 +116,7 @@ _update_shape_index = 1
 
 [node name="paredes" type="StaticBody2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 0, 1 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
