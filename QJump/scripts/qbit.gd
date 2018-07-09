@@ -37,8 +37,6 @@ func _fixed_process(delta):
 	if get_pos().x <= 38:
 		e = 0
 	
-	print("Teste")
-	
 	
 #	if get_pos().y <= 25 or get_pos().y >= 465:
 #		queue_free()
