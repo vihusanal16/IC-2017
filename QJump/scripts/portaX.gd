@@ -13,10 +13,7 @@ func _process(delta):
 	set_pos(get_pos() + Vector2(0,-1) * vel * delta)
 	
 	if get_pos().y < -30:
-		
-		#print("Free")
 		pass
-	pass
 
 
 func _on_portaH_body_enter( body ):
