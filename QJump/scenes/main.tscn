@@ -228,7 +228,7 @@ script/script = SubResource( 5 )
 
 transform/pos = Vector2( 206.759, 188.582 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="pauser" type="CanvasLayer" parent="."]
 
 process/pause_mode = 2
 layer = 1
@@ -236,6 +236,22 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 6 )
+
+[node name="paused" type="Label" parent="pauser"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 137.0
+margin/top = 210.0
+margin/right = 263.0
+margin/bottom = 230.0
+custom_fonts/font = ExtResource( 7 )
+text = "Pausado"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
