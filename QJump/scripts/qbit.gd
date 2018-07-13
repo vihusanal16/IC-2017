@@ -45,7 +45,7 @@ func _fixed_process(delta):
 	var walk_right = Input.is_action_pressed("move_right")
 	var jump = Input.is_action_pressed("jump")
 	var stop = true
-	
+
 	if troca_comandos:
 		walk_left = Input.is_action_pressed("move_right")
 		walk_right = Input.is_action_pressed("move_left")
