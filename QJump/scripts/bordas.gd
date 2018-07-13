@@ -13,10 +13,9 @@ func _on_bordas_body_enter( body ):
 		qbit1.set_pos(self.get_global_pos())
 		game.teste = 0
 		game.lifes -= 1
-		#get_tree().reload_current_scene()
-		get_tree().set_current_scene(qbit1)
+		get_tree().reload_current_scene()
 		if game.lifes <= 0:
-			get_tree().finish()
+			get_tree().change_scene("res://scenes/menu.tscn")
 	else:
 		game.teste = 1
 		
