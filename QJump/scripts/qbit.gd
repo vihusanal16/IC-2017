@@ -1,22 +1,20 @@
 extends KinematicBody2D
 
 const GRAVITY = 800 # Pixels por segundo
-
 const FLOOR_ANGLE_TOLERANCE = 40
 const WALK_FORCE = 600
-const WALK_MIN_SPEED = 20
-const WALK_MAX_SPEED = 350
+const WALK_MIN_SPEED = 10
+const WALK_MAX_SPEED = 310
 const STOP_FORCE = 1300
 const JUMP_SPEED = 400
 const JUMP_MAX_AIRBORNE_TIME = 0.2
 const SLIDE_STOP_VELOCITY = 1.0 # Um pixel por segundo
 const SLIDE_STOP_MIN_TRAVEL = 1.0 
+
 var velocity = Vector2()
 var on_air_time = 100
 var jumping = false
 var prev_jump_pressed = false
-
-var troca_comandos = false
 var portaH = 0
 
 func _ready():
@@ -25,6 +23,9 @@ func _ready():
 	pass
 
 func _fixed_process(delta):
+	
+	game.objeto = self
+	
 	var d = 1
 	var e = 1
 	
@@ -37,7 +38,6 @@ func _fixed_process(delta):
 	if get_pos().x <= 38:
 		e = 0
 	
-	
 #	if get_pos().y <= 25 or get_pos().y >= 465:
 #		queue_free()
 	
@@ -45,8 +45,8 @@ func _fixed_process(delta):
 	var walk_right = Input.is_action_pressed("move_right")
 	var jump = Input.is_action_pressed("jump")
 	var stop = true
-
-	if troca_comandos:
+	
+	if game.troca_comandos:
 		walk_left = Input.is_action_pressed("move_right")
 		walk_right = Input.is_action_pressed("move_left")
 
@@ -76,6 +76,8 @@ func _fixed_process(delta):
 
 	# Integrate velocity into motion and move
 	var motion = velocity*delta
+
+	game.movimento = motion
 
 	# Move and consume motion
 	motion = move(motion)
@@ -114,11 +116,11 @@ abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
 			motion = n.slide(motion)
 			velocity = n.slide(velocity)
 			# Then move again
-			move(motion)
+			game.movimento = move(motion)
 
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move(floor_velocity*delta)
+		game.movimento = move(floor_velocity*delta)
 
 	if (jumping and velocity.y > 0):
 		# If falling, no longer jumping
@@ -133,3 +135,4 @@ abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
 	on_air_time += delta
 	prev_jump_pressed = jump
 	
+	game.movimento = motion

@@ -24,28 +24,28 @@ func _process(delta):
 			plataforma.vel = 100
 			intervalo = 1.3
 			if dificuldade == 15:
-				plataforma.vel = 112
+				plataforma.vel = 107
 			pass
 		elif dificuldade > 15 and dificuldade <= 30:
-			plataforma.vel = 125
+			plataforma.vel = 114
 			intervalo = 1.1
 			if dificuldade == 30:
-				plataforma.vel = 137
+				plataforma.vel = 121
 			pass
 		elif dificuldade > 30  and dificuldade <= 50:
-			plataforma.vel = 150
+			plataforma.vel = 128
 			intervalo = .9
 			if dificuldade == 50:
-				plataforma.vel = 162
+				plataforma.vel = 135
 			pass
 		elif dificuldade > 50 and dificuldade <= 90:
-			plataforma.vel = 175
+			plataforma.vel = 142
 			intervalo = .7
 			if dificuldade == 90:
-				plataforma.vel = 190
+				plataforma.vel = 149
 			pass
 		else:
-			plataforma.vel = 200
+			plataforma.vel = 156
 			intervalo = .5
 		
 		#Gerando plataforma vermelha
@@ -67,13 +67,13 @@ func _process(delta):
 			pass
 	
 		#Gerando portaH
-		#if contador == 2:
-			#var portah = pre_portaH.instance()
-			#get_owner().add_child(portah)
-			#portah.set_owner(get_owner())
-			#portah.set_pos(plataforma.get_node("posPorta").get_global_pos())
-			#portah.vel = plataforma.vel
-			#pass
+		if contador == 4:
+			var portah = pre_portaH.instance()
+			get_owner().add_child(portah)
+			portah.set_owner(get_owner())
+			portah.set_pos(plataforma.get_node("posPorta").get_global_pos())
+			portah.vel = plataforma.vel
+			pass
 		
 		
 		dificuldade += 1

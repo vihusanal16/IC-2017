@@ -20,6 +20,6 @@ func _process(delta):
 func _on_portaH_body_enter( body ):
 	if body.get_layer_mask() == 8:
 		print("teste")
-		body.troca_comandos = not body.troca_comandos
+		game.troca_comandos = not game.troca_comandos
 		queue_free()
 	pass # replace with function body

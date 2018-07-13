@@ -6,6 +6,12 @@ var estado_inicial
 var morreu = 0
 var cont = 0
 var teste = 1
+var objeto
+var troca_comandos = false
+var movimento = Vector2()
+
+enum {VIVO, MORTO, SUPERPOSICAO}
+var estado = MORTO
 
 var score = 0 setget setScore
 var lifes = 3 setget setLifes
