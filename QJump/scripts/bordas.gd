@@ -15,7 +15,7 @@ func _on_bordas_body_enter( body ):
 		game.lifes -= 1
 		get_tree().reload_current_scene()
 		if game.lifes <= 0:
-			get_tree().finish()
+			get_tree().change_scene("res://scenes/menu.tscn")
 	else:
 		game.teste = 1
 		
