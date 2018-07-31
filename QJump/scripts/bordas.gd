@@ -8,6 +8,7 @@ func _ready():
 func _on_bordas_body_enter( body ):
 	if body.get_layer_mask() == 8 and game.teste == 1:
 		print("QBIT colidiu")
+		game.estado = game.MORTO
 		var qbit1 = pre_qbit1.instance()
 		get_owner().add_child(qbit1)
 		qbit1.set_pos(self.get_global_pos())

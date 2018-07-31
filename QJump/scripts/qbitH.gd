@@ -100,9 +100,9 @@ abs(velocity.x) < SLIDE_STOP_VELOCITY and get_collider_velocity() == Vector2()):
 	
 	if objeto != null:
 		direcao = (objeto.get_global_pos() - position).normalized()
-		direcao.x = 0
+#		direcao.x = 0
 
-		translate(velocidade * direcao * delta)
+		translate(velocidade * Vector2(0, direcao.y) * delta)
 		pass
 	
 	pass
