@@ -30,8 +30,11 @@ func _process(delta):
 	pass
 	
 func setScore(valor):
-	if valor % 5 == 0:
-		score += 1
+	if valor != 0:
+		if valor % 5 == 0:
+			score += 1
+	else:
+		score = 0
 	emit_signal("score_changed")
 
 func setLifes(valor):

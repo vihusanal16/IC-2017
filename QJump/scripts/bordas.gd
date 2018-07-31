@@ -19,6 +19,7 @@ func _on_bordas_body_enter( body ):
 		if game.lifes <= 0:
 			get_tree().change_scene("res://scenes/menu.tscn")
 			game.lifes = 3
+			game.setScore(0)
 	else:
 		game.teste = 1
 		
