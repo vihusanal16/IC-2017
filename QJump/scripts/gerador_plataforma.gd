@@ -49,14 +49,15 @@ func _process(delta):
 			intervalo = .5
 		
 		#Gerando plataforma vermelha
-		#if contador == 1:
-			#var vermelha = pre_vermelha.instance()
-			#get_owner().add_child(vermelha)
-			#vermelha.vel = plataforma.vel
-			#vermelha.set_pos(Vector2(rand_range(60,330),550))
-			#pass
-		get_owner().add_child(plataforma)
-		plataforma.set_pos(Vector2(rand_range(60,330),550))
+		if contador == 4:
+			var vermelha = pre_vermelha.instance()
+			get_owner().add_child(vermelha)
+			vermelha.vel = plataforma.vel
+			vermelha.set_pos(Vector2(rand_range(60,330),550))
+			pass
+		else:
+			get_owner().add_child(plataforma)
+			plataforma.set_pos(Vector2(rand_range(60,330),550))
 	
 		#Gerando portaX
 		if contador == 2:
@@ -67,7 +68,7 @@ func _process(delta):
 			pass
 	
 		#Gerando portaH
-		if contador == 4:
+		if contador == 3:
 			var portah = pre_portaH.instance()
 			get_owner().add_child(portah)
 			portah.set_owner(get_owner())
