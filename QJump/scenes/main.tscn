@@ -4,10 +4,10 @@
 [ext_resource path="res://scripts/bordas.gd" type="Script" id=2]
 [ext_resource path="res://scenes/plataforma.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/background.png" type="Texture" id=4]
-[ext_resource path="res://scenes/qbit.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/pauser.gd" type="Script" id=6]
-[ext_resource path="res://fonts/score.fnt" type="BitmapFont" id=7]
-[ext_resource path="res://sprites/pixel-heart.png" type="Texture" id=8]
+[ext_resource path="res://scripts/pauser.gd" type="Script" id=5]
+[ext_resource path="res://fonts/score.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://sprites/pixel-heart.png" type="Texture" id=7]
+[ext_resource path="res://scenes/qbit.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -222,10 +222,6 @@ drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 script/script = SubResource( 5 )
 
-[node name="qbit" parent="." instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 206.759, 188.582 )
-
 [node name="pauser" type="CanvasLayer" parent="."]
 
 process/pause_mode = 2
@@ -233,7 +229,7 @@ layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-script/script = ExtResource( 6 )
+script/script = ExtResource( 5 )
 
 [node name="paused" type="Label" parent="pauser"]
 
@@ -246,7 +242,7 @@ margin/left = 137.0
 margin/top = 210.0
 margin/right = 263.0
 margin/bottom = 230.0
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 6 )
 text = "Pausado"
 percent_visible = 1.0
 lines_skipped = 0
@@ -270,8 +266,8 @@ margin/left = 201.0
 margin/top = 2.0
 margin/right = 393.0
 margin/bottom = 32.0
-custom_fonts/font = ExtResource( 7 )
-text = "0"
+custom_fonts/font = ExtResource( 6 )
+text = "1665"
 align = 2
 valign = 1
 percent_visible = 1.0
@@ -283,7 +279,11 @@ script/script = SubResource( 6 )
 
 transform/scale = Vector2( 0.3, 0.3 )
 script/script = SubResource( 7 )
-textura = ExtResource( 8 )
+textura = ExtResource( 7 )
+
+[node name="qbit" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 201.403, 186.298 )
 
 [connection signal="body_enter" from="bordas" to="bordas" method="_on_bordas_body_enter"]
 

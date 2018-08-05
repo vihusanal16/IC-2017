@@ -6,13 +6,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 41.338 )
+extents = Vector2( 13.0774, 10 )
 
 [node name="qbit" type="KinematicBody2D"]
 
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 0.7777, 0, 0, 0.155313, 0.0872099, 11.1442 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.563657, 0.427187, 11.6531 )
 shapes/0/trigger = false
 collision/layers = 8
 collision/mask = 1
@@ -25,15 +25,12 @@ transform/scale = Vector2( 0.02, 0.02 )
 texture = ExtResource( 2 )
 modulate = Color( 0, 1, 0.31149, 1 )
 
-[node name="pos_QbitH" type="Position2D" parent="Sprite"]
-
-transform/pos = Vector2( 0.521183, 2.80889 )
-transform/scale = Vector2( 23.3949, 12.0385 )
+[node name="Position2D" type="Position2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 0.0872099, 11.1442 )
-transform/scale = Vector2( 0.7777, 0.155313 )
+transform/pos = Vector2( 0.427187, 11.6531 )
+transform/scale = Vector2( 1, 0.563657 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
