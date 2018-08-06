@@ -47,9 +47,15 @@ func _fixed_process(delta):
 	var stop = true
 	
 	if game.troca_comandos:
+		if game.posicao == false:
+			get_node("animacao").play("efeito_portaX")
+		else:
+			get_node("animacao").play("efeito_portaX")
+			
 		walk_left = Input.is_action_pressed("move_right")
 		walk_right = Input.is_action_pressed("move_left")
-
+		pass
+		
 	if(walk_right and walk_left):
 		walk_left = false
 		walk_right = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/qbit.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Shiny_steel_ball.png" type="Texture" id=2]
@@ -6,13 +6,47 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13.0774, 10 )
+extents = Vector2( 10, 10 )
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "efeito_portaX"
+length = 0.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.31149, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "volta_portaX"
+length = 0.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0, 1, 0.313726, 1 ) ]
+}
 
 [node name="qbit" type="KinematicBody2D"]
 
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 0.563657, 0.427187, 11.6531 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.577795, 0.323532, 11.6358 )
 shapes/0/trigger = false
 collision/layers = 8
 collision/mask = 1
@@ -25,14 +59,26 @@ transform/scale = Vector2( 0.02, 0.02 )
 texture = ExtResource( 2 )
 modulate = Color( 0, 1, 0.31149, 1 )
 
-[node name="Position2D" type="Position2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 0.427187, 11.6531 )
-transform/scale = Vector2( 1, 0.563657 )
+transform/pos = Vector2( 0.323532, 11.6358 )
+transform/scale = Vector2( 1, 0.577795 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="animacao" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/efeito_portaX = SubResource( 2 )
+anims/volta_portaX = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 

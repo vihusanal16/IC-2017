@@ -1,7 +1,7 @@
 extends Node
 
 const GRUPO_QBIT = "qbit"
-var posicao = 0
+var posicao = true
 var estado_inicial
 var morreu = 0
 var cont = 0
